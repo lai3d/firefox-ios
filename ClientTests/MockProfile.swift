@@ -134,6 +134,10 @@ public class MockProfile: Profile {
         return ReadingListService(profileStoragePath: self.files.rootPath as String)
     }()
 
+    lazy var recentlyClosedTabs: RecentlyClosedTabs = {
+        return MockRecentlyClosedTabsStore(prefs: self.prefs)
+    }()
+
     internal lazy var remoteClientsAndTabs: RemoteClientsAndTabs = {
         return SQLiteRemoteClientsAndTabs(db: self.db)
     }()

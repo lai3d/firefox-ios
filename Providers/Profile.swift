@@ -145,6 +145,7 @@ protocol Profile: class {
     var readingList: ReadingListService? { get }
     var logins: protocol<BrowserLogins, SyncableLogins, ResettableSyncStorage> { get }
     var certStore: CertStore { get }
+    var recentlyClosedTabs: RecentlyClosedTabs { get }
 
     func shutdown()
 
@@ -381,6 +382,10 @@ public class BrowserProfile: Profile {
 
     lazy var certStore: CertStore = {
         return CertStore()
+    }()
+
+    lazy var recentlyClosedTabs: RecentlyClosedTabs = {
+        return RecentlyClosedTabsStore()
     }()
 
     private func getSyncDelegate() -> SyncDelegate {

@@ -2022,6 +2022,10 @@ extension BrowserViewController: TabManagerDelegate {
         updateTabCountUsingTabManager(tabManager)
         // tabDelegate is a weak ref (and the tab's webView may not be destroyed yet)
         // so we don't expcitly unset it.
+
+        if let url = tab.displayURL where !AboutUtils.isAboutURL(tab.url) && !tab.isPrivate {
+            profile.recentlyClosedTabs.addTab(url, title: tab.title, faviconURL: tab.displayFavicon?.url)
+        }
     }
 
     func tabManagerDidAddTabs(tabManager: TabManager) {
